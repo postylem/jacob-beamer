@@ -1,2 +1,2 @@
 # jacob-beamer
-a simple beamer template I use
+a simple beamer template I use for linguistics/math presentations

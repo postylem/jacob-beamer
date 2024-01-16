@@ -1,0 +1,150 @@
+% \documentclass{article}\usepackage{beamerarticle} % comment for beamer
+
+%%%%%%%%%%%%%%%%%%%%%%
+% uncomment for beamer
+\documentclass[10pt]{beamer}% option hyperref={pdfpagelabels=false} may be needed
+\setbeamerfont{headline}{size=\footnotesize}% rather than tiny
+\usetheme[subsection=true]{Edinburgh}
+\usecolortheme{Karlsruhe}
+\usepackage{fontspec}
+\setmainfont{Linux Libertine}
+\setsansfont{Linux Biolinum}
+\setmonofont{Fira Code}
+\usefonttheme{professionalfonts} % can also be passed as option to documentclass
+\setbeamertemplate{enumerate items}[default]
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath,amssymb,amsthm,enumerate,hyperref,mathdots,mathtools}
+\usepackage{enumitem,booktabs} 
+\usepackage{multicol}
+\usepackage[yyyymmdd]{datetime}\renewcommand{\dateseparator}{.}
+\usepackage{ulem}\normalem
+\newtheorem*{remark}{Remark}
+
+
+%% make \pause work in align environment
+%% https://tex.stackexchange.com/a/75550
+\makeatletter
+\let\save@measuring@true\measuring@true
+\def\measuring@true{%
+  \save@measuring@true
+  % \def\beamer@sortzero##1{\beamer@ifnextcharospec{\beamer@sortzeroread{##1}}{}}%
+  \def\beamer@sortzeroread##1<##2>{}%
+  \def\beamer@finalnospec{}%
+}
+\makeatother
+
+%%%%%%% commands defining backup slides so that frame numbering is correct
+\newcommand{\backupbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+
+\input{/Users/j/Library/texmf/custom/information-theory-operators.tex} % for expectation \E{}, entropy \H{}, MI \I{} etc
+
+
+\usepackage[%
+  natbib=true,backend=biber,sorting=nymdt,%
+  citestyle=authoryear,bibstyle=authoryear,%
+  url=false,doi=false,isbn=false,
+  ]{biblatex}
+\addbibresource{/Users/j/Library/texmf/bibtex/bib/all.bib} 
+\input{/Users/j/Library/texmf/custom/jbib_links.tex} % note: imports xcolor, imports and configs hyperref, defines nymdt sorting
+% \usepackage{cleveref} % must come after importing hyperref
+
+\input{/Users/j/Library/texmf/custom/jformat.tex} % general formatting things
+
+\title{Title here}
+\subtitle{a beamer template}
+\date{8th of April, 2021}
+\author{Jacob Louis Hoover}
+
+\begin{document}
+
+{%hide headline within these brackets
+\setbeamertemplate{headline}{}
+\maketitle
+% \begin{frame}% show an outline
+% \paragraph{Outline}
+% \tableofcontents
+% \end{frame}
+}
+
+\section{background}
+\subsection{something}
+
+\begin{frame}
+Suppose you want to say something. You need a citation.
+An example citation is~\cite{billingsley.p:1995}.
+
+\end{frame}
+
+\begin{frame}
+
+We have a list below.
+
+\begin{itemize}
+\item for each (typical) $X^n$, there are $\approx 2^{nH(Y|X)}$ possible $Y^n$
+\item Total number of (typical) $Y^n$ is $\approx 2^{nH(Y)}$
+\item The relationship should be $2^{n(H(Y)}/2^{H(Y|X))} = 2^{nI(X;Y )}$
+\item To formalize these ideas, we need to discuss \alert{alerted text}
+\end{itemize}
+\end{frame}
+
+\subsection{something else}
+\begin{frame}
+Let $X$ be a discrete random variable on $\mathcal{X}$, and let $p_X$ be the probability distribution of $X$.
+
+\end{frame}
+
+\subsection{something else}
+
+
+\begin{frame}
+Here's something for ya.
+
+\pause
+\begin{remark}
+Here's a remark.
+\end{remark}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\backupbegin %defines begin of backup slides so the numbering stops
+
+\begin{frame}\label{model_appendix}
+    \begin{itemize}
+        \item Item 1
+        \item Item 2
+        \begin{itemize}
+            \item Subitem 1
+            \item
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+%add the Bibliography
+\begin{frame}[allowframebreaks]{}
+\printbibliography
+\end{frame}
+
+\backupend % end of backup slides
+\end{document}
+
+
+%--- Next Frame ---%
+% \begin{frame}
+% Something first
+
+% \alert<3>{Look here at 3}
+% \only<3>{Appears!}
+
+% \uncover<2->{Uncover 2}
+
+% \end{frame}
+
